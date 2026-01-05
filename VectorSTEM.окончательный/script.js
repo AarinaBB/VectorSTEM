@@ -8,6 +8,11 @@
 
     const href = a.getAttribute("href");
     if (!href) return;
+    // НЕ перехватываем PDF viewer и скачивание
+if (a.classList.contains("pdf-open") || a.hasAttribute("data-pdf")) return;
+if (a.hasAttribute("download")) return;
+if (href.toLowerCase().endsWith(".pdf")) return;
+
 
     const isExternal =
       a.target === "_blank" ||
@@ -160,3 +165,169 @@
   initCourses().catch(console.error);
   initRecordings().catch(console.error);
 })();
+document.addEventListener("DOMContentLoaded", () => {
+  const viewer = document.getElementById("pdfViewer");
+  const frame = document.getElementById("pdfFrame");
+  const titleEl = document.getElementById("pdfTitle");
+  const dl = document.getElementById("pdfDownload");
+  const fullBtn = document.getElementById("pdfFullBtn");
+  const frameWrap = document.getElementById("pdfFrameWrap");
+
+  if (!viewer || !frame) return;
+
+  document.querySelectorAll(".pdf-item").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const pdf = btn.dataset.pdf;
+      const title = btn.dataset.title || "PDF";
+
+      // показать viewer
+      viewer.hidden = false;
+
+      // подставить pdf в iframe (внутри страницы)
+      frame.src = pdf;
+
+      // обновить заголовок и download
+      titleEl.textContent = title;
+      dl.href = pdf;
+
+      // прокрутить к viewer (красиво)
+      viewer.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  fullBtn?.addEventListener("click", async () => {
+    // fullscreen для контейнера (работает лучше чем для iframe)
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    } else {
+      await frameWrap.requestFullscreen();
+    }
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("pdfModal");
+  const frame = document.getElementById("pdfFrame");
+  const titleEl = document.getElementById("pdfModalTitle");
+  const dl = document.getElementById("pdfDownload");
+  const fullBtn = document.getElementById("pdfFullBtn");
+  const frameWrap = document.getElementById("pdfFrameWrap");
+
+  if (!modal || !frame) return;
+
+  const openModal = (pdf, title) => {
+    titleEl.textContent = title || "PDF";
+    frame.src = pdf;
+    dl.href = pdf;
+
+    modal.hidden = false;
+    document.body.style.overflow = "hidden"; // lock scroll
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+    frame.src = ""; // stop loading
+    document.body.style.overflow = "";
+  };
+
+  document.querySelectorAll(".pdf-card").forEach(card => {
+    card.addEventListener("click", () => {
+      openModal(card.dataset.pdf, card.dataset.title);
+    });
+  });
+
+  modal.querySelectorAll("[data-pdf-close]").forEach(el => {
+    el.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!modal.hidden && e.key === "Escape") closeModal();
+  });
+
+  fullBtn?.addEventListener("click", async () => {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    } else {
+      await frameWrap.requestFullscreen();
+    }
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const viewer = document.getElementById("pdfViewer");
+  const frame = document.getElementById("pdfViewerFrame");
+  const title = document.getElementById("pdfViewerTitle");
+  const dl = document.getElementById("pdfViewerDownload");
+  const closeBtn = document.getElementById("pdfViewerClose");
+
+  if (!viewer || !frame || !title || !dl || !closeBtn) return;
+
+  const openPdf = (url, name) => {
+    title.textContent = name || "PDF";
+    frame.src = url + "#view=FitH";
+    dl.href = url;
+    viewer.hidden = false;
+    viewer.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const closePdf = () => {
+    viewer.hidden = true;
+    frame.src = "";
+  };
+
+  document.querySelectorAll(".pdf-open").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      openPdf(btn.dataset.pdf || btn.href, btn.dataset.title || "PDF");
+    });
+  });
+
+  closeBtn.addEventListener("click", closePdf);
+    // Inline PDF viewer (opens under clicked item)
+  function initInlinePdfViewer() {
+    const viewer = document.getElementById("pdfViewer");
+    const frame = document.getElementById("pdfViewerFrame");
+    const titleEl = document.getElementById("pdfViewerTitle");
+    const dl = document.getElementById("pdfViewerDownload");
+    const closeBtn = document.getElementById("pdfViewerClose");
+
+    if (!viewer || !frame || !titleEl || !dl || !closeBtn) return;
+
+    function openUnderItem(anchor) {
+      const pdf = anchor.dataset.pdf;
+      const title = anchor.dataset.title || "PDF";
+      if (!pdf) return;
+
+      // переставляем viewer сразу под тот пункт, который кликнули
+      const item = anchor.closest(".pdf-item");
+      if (item) item.insertAdjacentElement("afterend", viewer);
+
+      titleEl.textContent = title;
+      frame.src = pdf + "#view=FitH";
+      dl.href = pdf;
+
+      viewer.hidden = false;
+      viewer.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function closeViewer() {
+      viewer.hidden = true;
+      frame.src = "";
+    }
+
+    document.querySelectorAll("a.pdf-open").forEach((a) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();     // чтобы НЕ открывалось как ссылка
+        e.stopPropagation();    // чтобы НЕ ловил page transition
+        openUnderItem(a);
+      });
+    });
+
+    closeBtn.addEventListener("click", closeViewer);
+
+    document.addEventListener("keydown", (e) => {
+      if (!viewer.hidden && e.key === "Escape") closeViewer();
+    });
+  }
+
+  initInlinePdfViewer();
+
+});
