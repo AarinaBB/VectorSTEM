@@ -368,7 +368,7 @@ textarea{min-height:130px; resize:vertical}
   margin:0 auto;
 
   background:rgba(255,255,255,.86);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(2px);
   border:1px solid rgba(17,24,39,.14);
   border-radius:18px;
   padding:18px 18px 16px;
@@ -419,7 +419,7 @@ body.home .hero-wrap::before{
   position:absolute;
   inset:0;
   background: url("assets/images/hero.png") center/cover no-repeat;
-  filter: blur(4px) brightness(.55) saturate(1.05);
+  filter: blur(2px) brightness(.55) saturate(1.05);
   transform: scale(1.10);
   z-index:0;
 }
@@ -497,4 +497,176 @@ body.home .header{
 .research-card a{
   color: rgba(255,255,255,.92);
   text-decoration: underline;
+}
+/* ===== Home hero background (ONLY on index.html) ===== */
+.home-hero{
+  position: relative;
+  padding: 0;
+  min-height: calc(100vh - 72px); /* 72px = header height */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  background: #0b1020;
+}
+
+/* background image layer */
+.home-hero::before{
+  content:"";
+  position:absolute;
+  inset:-22px; /* gives space for blur edges */
+  background: url("assets/images/hero.png") center/cover no-repeat;
+
+  /* SHARPNESS: уменьши/увеличь blur */
+  filter: blur(2px) brightness(.85) saturate(110%);
+  transform: scale(1.04);
+}
+
+/* dark vignette for readability */
+.home-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(60% 60% at 50% 20%, rgba(0,0,0,.15), rgba(0,0,0,.65));
+}
+
+.home-hero__content{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  padding-top: 64px;
+  padding-bottom: 72px; /* pushes About lower */
+}
+
+/* make hero text readable on background */
+.hero--on-bg h1{
+  color:#fff;
+}
+.hero--on-bg p{
+  color: rgba(255,255,255,.82);
+}
+
+/* About card centered + white frame */
+.hero-card--center{
+  position: relative;
+  margin: 26px auto 0;
+  max-width: 860px;
+
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(255,255,255,.65);
+  backdrop-filter: blur(2px);
+}
+
+/* mobile tweaks */
+@media (max-width: 640px){
+  .home-hero__content{ padding-top: 44px; padding-bottom: 56px; }
+  .hero--on-bg h1{ font-size: 34px; }
+}
+/* ===== HOME: hero image + overlay mission card (Wix-style) ===== */
+.home-mission{
+  padding: 28px 0 0;
+}
+
+.home-hero-image{
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.home-hero-image img{
+  width: 100%;
+  height: auto;
+  display: block;
+  /* sharpness control */
+  filter: blur(0px) contrast(1.03) saturate(1.05);
+}
+
+/* the white card that sits ON the image */
+.mission-card{
+  max-width: 760px;
+  margin: -120px auto 0;   /* <-- это делает "наезд" на картинку */
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.12);
+  padding: 42px 44px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.mission-title{
+  font-size: 22px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #111827;
+  margin-bottom: 18px;
+}
+
+.mission-text{
+  font-size: 15px;
+  line-height: 1.8;
+  color: #374151;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.mission-actions{
+  margin-top: 26px;
+}
+
+/* mobile */
+@media (max-width: 720px){
+  .mission-card{
+    margin: -80px 14px 0;
+    padding: 28px 22px;
+  }
+}
+/* ===== About typography ===== */
+.mission-text{
+  text-align: justify;          /* ровные края */
+  text-justify: inter-word;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #2b2f36;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.mission-text p{
+  margin: 0 0 14px;
+}
+
+/* красивый "VectorSTEM" как бренд */
+.mission-brand{
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 18px;
+  color: #111827;
+}
+
+/* первая строка чуть сильнее */
+.mission-lead{
+  font-size: 16.5px;
+}
+
+/* финальная строка более “закрывающая” */
+.mission-foot{
+  margin-top: 2px;
+}
+
+/* чтобы justified не выглядел странно на мобилке */
+@media (max-width: 640px){
+  .mission-text{ text-align: left; }
+}
+/* ===== Header brand ===== */
+.brand{
+  font-size: 22px;         /* больше */
+  font-weight: 800;        /* жирнее */
+  letter-spacing: -0.02em; /* более “премиум” */
+  color: #0f172a;
+}
+
+.brand:hover{
+  opacity: .9;
 }
