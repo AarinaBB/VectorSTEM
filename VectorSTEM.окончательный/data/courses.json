@@ -1,0 +1,182 @@
+{
+  "categories": [
+    {
+      "id": "computer-science",
+      "title": "Computer Science",
+      "image": "assets/images/cs.webp",
+      "summary": "Programming, algorithms, and real engineering habits.",
+      "details": {
+        "lead": "Build strong fundamentals in programming and problem-solving, with clear explanations and structured practice.",
+        "bullets": [
+          "C++ foundations → OOP → clean code habits",
+          "Data structures & algorithms (concepts + implementation)",
+          "Problem-solving patterns for interviews & competitions",
+          "Projects: small, focused, and measurable"
+        ],
+        "links": [
+          {
+            "label": "C++ (OOP + Practice)",
+            "href": "courses/cpp.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "math",
+      "title": "Math",
+      "image": "assets/images/math.png",
+      "summary": "From foundations to university mathematics — with full understanding.",
+      "details": {
+        "lead": "Mathematics built the right way: definitions, intuition, structure, and step‑by‑step reasoning — not shortcuts.",
+        "bullets": [
+          "Foundations: arithmetic → algebra → geometry → precalc",
+          "University: Calculus I–III, Linear Algebra, Differential Equations",
+          "Proof mindset: why statements are true, not only how to compute",
+          "Problem sets + solutions designed for mastery"
+        ],
+        "links": [
+          {
+            "label": "Arithmetic Foundations",
+            "href": "courses/arithmetic-foundations.html"
+          },
+          {
+            "label": "Pre‑Algebra",
+            "href": "courses/pre-algebra.html"
+          },
+          {
+            "label": "Algebra",
+            "href": "courses/algebra.html"
+          },
+          {
+            "label": "Geometry",
+            "href": "courses/geometry.html"
+          },
+          {
+            "label": "Trigonometry",
+            "href": "courses/trigonometry.html"
+          },
+          {
+            "label": "Precalculus",
+            "href": "courses/precalculus.html"
+          },
+          {
+            "label": "Calculus I",
+            "href": "courses/calc1.html"
+          },
+          {
+            "label": "Calculus 2",
+            "href": "courses/calc2.html"
+          },
+          {
+            "label": "Calculus 3 (Multivariable)",
+            "href": "courses/calc3.html"
+          },
+          {
+            "label": "Linear Algebra",
+            "href": "courses/linear-algebra.html"
+          },
+          {
+            "label": "Differential Equations",
+            "href": "courses/differential-equations.html"
+          },
+          {
+            "label": "Discrete Structures",
+            "href": "courses/discrete-structures.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "physics",
+      "title": "Physics",
+      "image": "assets/images/physics.jpg",
+      "summary": "Mechanics, E&M, waves — and how to think like a physicist.",
+      "details": {
+        "lead": "Physics as a coherent system: models, approximations, and deep intuition supported by mathematics.",
+        "bullets": [
+          "Mechanics → energy methods → oscillations",
+          "Electricity & magnetism foundations",
+          "Waves, signals, and physical interpretation",
+          "Problem-solving: from setup to final check"
+        ],
+        "links": [
+          {
+            "label": "Physics (Core Path)",
+            "href": "courses/physics.html"
+          },
+          {
+            "label": "College Physics Sequence",
+            "href": "courses/college-physics.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "competitions",
+      "title": "Competitions",
+      "image": "assets/images/competitions.jpg",
+      "summary": "Olympiad thinking, Putnam-style problems, and advanced strategy.",
+      "details": {
+        "lead": "High-level problem solving that develops creativity, rigor, and speed — without losing clarity.",
+        "bullets": [
+          "Putnam / IMC-style problems and techniques",
+          "How to build solution structure under pressure",
+          "Common traps + systematic error analysis",
+          "Weekly challenge sets + curated solutions"
+        ],
+        "links": [
+          {
+            "label": "Competition (Worldwide)",
+            "href": "courses/competition-worldwide.html"
+          },
+          {
+            "label": "Advanced Problem Solving",
+            "href": "courses/advanced-problem-solving.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "apostol",
+      "title": "Apostol",
+      "image": "assets/images/apostol.jpg",
+      "summary": "Calculus through structure, proofs, and conceptual clarity.",
+      "details": {
+        "lead": "Apostol-style calculus: not just computation — but the internal logic of calculus, built from definitions.",
+        "bullets": [
+          "Definitions first: what objects are, and why they matter",
+          "Theorems with meaning: intuition + proof sketch + formal structure",
+          "Selected exercises and guided solutions",
+          "A path that builds real mathematical maturity"
+        ],
+        "links": [
+          {
+            "label": "Apostol Track",
+            "href": "courses/feynman-apostol.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "feynman",
+      "title": "Feynman (Lectures and Problems)",
+      "image": "assets/images/feynman.jpg",
+      "summary": "Intuition-first physics + serious problem solving.",
+      "details": {
+        "lead": "Feynman-style learning: sharp intuition, physical meaning, and problems that force real understanding.",
+        "bullets": [
+          "Concepts explained as mental models",
+          "From story → equation → prediction",
+          "Problems + solution breakdowns with reasoning",
+          "A bridge between ideas and computation"
+        ],
+        "links": [
+          {
+            "label": "Feynman Track",
+            "href": "courses/feynman-apostol.html"
+          }
+        ]
+      }
+    }
+  ]
+}
